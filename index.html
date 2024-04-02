@@ -22,13 +22,13 @@
 </style>
 
 <script>
-    AFRAME.registerComponent('testModel', {
+    AFRAME.registerComponent('testmodel', {
         schema: {
             
         },
 
         init: function () {
-            console.log("init testModel", this.el);
+            console.log("init testmodel", this.el);
             
         },
 
@@ -73,7 +73,7 @@
         <a-nft
             type='nft' url='https://ar-js-org.github.io/.github/profile/aframe/examples/image-tracking/nft/trex/trex-image/trex'
             smooth='true' smoothCount='10' smoothTolerance='0.01' smoothThreshold='5'>
-            <a-entity testModel
+            <a-entity testmodel
                 gltf-model='./trex/scene.gltf'
                 scale="5 5 5"
                 position="150 300 -100"
