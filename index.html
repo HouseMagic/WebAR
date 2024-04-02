@@ -29,7 +29,15 @@
 
         init: function () {
             console.log("init testmodel", this.el);
-            
+            var marker = this.el;
+            marker.addEventListener('markerFound', function () {
+                console.log("--- marker found");
+            }.bind(this));
+
+            marker.addEventListener('markerLost', function() {
+                console.log("--- marker markerLost");
+            }.bind(this));
+                
         },
 
         update: function () {
@@ -70,14 +78,16 @@
         embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'>
 
         <!-- use rawgithack to retrieve the correct url for nft marker (see 'pinball' below) -->
-        <a-nft
+        <a-nft testmodel
             type='nft' url='https://ar-js-org.github.io/.github/profile/aframe/examples/image-tracking/nft/trex/trex-image/trex'
             smooth='true' smoothCount='10' smoothTolerance='0.01' smoothThreshold='5'>
-            <a-entity testmodel
+            <a-entity 
                 gltf-model='./trex/scene.gltf'
                 scale="120 120 120"
                 position="0 300 -100"
+                rotation="0 0 90"
                 >
+                <a-sphere color="red" radius="2"></a-sphere>
             </a-entity>
         </a-nft>
 		<a-entity camera></a-entity>
