@@ -35,8 +35,8 @@
                 // this.el.pause();
                 // var nftCamera = document.querySelector("#nftCamera");
                 // nftCamera.setAttribute('camera', 'active', false);
-                var nftmodel = document.querySelector("#nftmodel")
-                nftmodel.setAttribute('visible', true);
+                // var nftmodel = document.querySelector("#nftmodel")
+                // nftmodel.setAttribute('visible', true);
             }.bind(this));
 
             marker.addEventListener('markerLost', function() {
@@ -86,10 +86,11 @@
         <a-nft testmodel
             type='nft' url='https://ar-js-org.github.io/.github/profile/aframe/examples/image-tracking/nft/trex/trex-image/trex'
             smooth='true' smoothCount='10' smoothTolerance='0.01' smoothThreshold='5'>
+            <a-entity id="nftmodel" gltf-model='./trex/scene.gltf'  scale="120 120 120" position="0 300 -100" rotation="-90 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 3000">
+                <a-sphere color="red" scale="0.1 0.1 0.1" radius="1" sound="src: url(vectory.mp3); on: click"></a-sphere>
+            </a-entity>
         </a-nft>
-        <a-entity id="nftmodel" gltf-model='./trex/scene.gltf'  scale="120 120 120" position="0 300 -100" rotation="-90 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 3000" visible="false">
-            <a-sphere color="red" scale="0.1 0.1 0.1" radius="1" sound="src: url(vectory.mp3); on: click"></a-sphere>
-        </a-entity>
+        
 		<a-entity id="nftCamera" camera></a-entity>
     </a-scene>
 </body>
