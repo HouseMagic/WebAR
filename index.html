@@ -34,17 +34,17 @@
         </a-assets>
 
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-        <a-entity cursor position="0 0 0"></a-entity>
-        <a-entity cursor="rayOrigin: mouse"></a-entity>
+        <a-entity raycaster="objects: .clickable" cursor></a-entity>
+
         <a-entity mindar-image-target="targetIndex: 0">
             <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#raccoonModel" animation-mixer>
-                <a-sphere fooclick color="yellow" radius="1" sound="src:url(https://housemagic.github.io/WebAR/vectory.mp3); on: click"></a-sphere>
+                <a-sphere clickable fooclick color="yellow" radius="1" sound="src:url(https://housemagic.github.io/WebAR/vectory.mp3); on: click"></a-sphere>
             </a-gltf-model>
         </a-entity>
         <a-entity mindar-image-target="targetIndex: 1">
             <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel"  sound="src:#vectorysound; on: click" animation-mixer>
             </a-gltf-model>
-            <a-sphere fooclick color="red" radius="0.1" sound="src:#vectorysound; on: click"></a-sphere>
+            <a-sphere clickable fooclick color="red" radius="0.1" sound="src:#vectorysound; on: click"></a-sphere>
         </a-entity>
     </a-scene>
   </body>
