@@ -83,17 +83,27 @@
         embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'>
 
         <!-- use rawgithack to retrieve the correct url for nft marker (see 'pinball' below) -->
-        <a-nft testmodel
+        <!-- <a-nft testmodel
             type='nft' url='https://ar-js-org.github.io/.github/profile/aframe/examples/image-tracking/nft/trex/trex-image/trex'
             smooth='true' smoothCount='10' smoothTolerance='0.01' smoothThreshold='5'>
             
-        </a-nft>
+        </a-nft> -->
         <!-- <a-entity id="nftmodel" gltf-model='./trex/scene.gltf'  scale="120 120 120" position="0 300 -100" rotation="-90 0 0" visible="true">
             <a-sphere color="red" scale="0.1 0.1 0.1" radius="1" sound="src: url(https://housemagic.github.io/WebAR/vectory.mp3); on: click"></a-sphere>
         </a-entity> -->
 
-        <a-entity id="nftmodel1" gltf-model='./trex/scene.gltf'  scale="1 1 1" position="0 1 0" rotation="-90 0 0" visible="true">
+        <!-- <a-entity id="nftmodel1" gltf-model='./trex/scene.gltf'  scale="1 1 1" position="0 1 0" rotation="-90 0 0" visible="true">
             <a-sphere color="red" scale="0.1 0.1 0.1" radius="1" sound="src: url(https://housemagic.github.io/WebAR/vectory.mp3); on: click"></a-sphere>
+        </a-entity> -->
+
+
+        <a-assets>
+            <audio id="river" src="https://housemagic.github.io/WebAR/vectory.mp3" preload="auto" ></audio>
+        </a-assets>
+    
+        <a-entity
+            gltf-model="https://housemagic.github.io/WebAR/trex/scene.gltf" scale="1 1 1" position="-1 0.5 -3" rotation="0 0 0" >
+            <a-sphere color="red" scale="0.1 0.1 0.1" radius="1" sound="src: url(https://housemagic.github.io/WebAR/fail.mp3); on: click" ></a-sphere>
         </a-entity>
 		<!-- <a-entity id="nftCamera" camera></a-entity> -->
     </a-scene>
