@@ -27,25 +27,27 @@
     </script>
 
     <a-scene mindar-image="imageTargetSrc: https://housemagic.github.io/WebAR/assets/houseband.mind; maxTrack: 2" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+       
+        <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="near: 10; far: 10000; objects: .clickable"></a-camera>
+
         <a-assets>
             <a-asset-item id="bearModel" src="https://housemagic.github.io/WebAR/assets/bear/scene.gltf"></a-asset-item>
             <a-asset-item id="raccoonModel" src="https://housemagic.github.io/WebAR/assets/raccoon/scene.gltf"></a-asset-item>
             <audio id="vectorysound" src="https://housemagic.github.io/WebAR/vectory.mp3" preload="auto"></audio>
         </a-assets>
 
-        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-        <a-entity raycaster="objects: .clickable" cursor></a-entity>
-
         <a-entity mindar-image-target="targetIndex: 0">
             <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#raccoonModel" animation-mixer>
-                <a-sphere clickable fooclick color="yellow" radius="1" sound="src:url(https://housemagic.github.io/WebAR/vectory.mp3); on: click"></a-sphere>
+                <a-sphere class="clickable" color="yellow" radius="1" sound="src:url(https://housemagic.github.io/WebAR/vectory.mp3); on: click"></a-sphere>
             </a-gltf-model>
         </a-entity>
+
         <a-entity mindar-image-target="targetIndex: 1">
             <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel"  sound="src:#vectorysound; on: click" animation-mixer>
             </a-gltf-model>
-            <a-sphere clickable fooclick color="red" radius="0.1" sound="src:#vectorysound; on: click"></a-sphere>
+            <a-sphere class="clickable" color="red" radius="0.1" sound="src:url(vectorysound.mp3); on: click"></a-sphere>
         </a-entity>
+
     </a-scene>
   </body>
 </html>
