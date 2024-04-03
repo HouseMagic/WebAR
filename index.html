@@ -10,11 +10,27 @@
         <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
     </head>
   <body>
+    <script>
+        AFRAME.registerComponent('fooclick', {
+            schema: {},
+            init: function () {
+                this.el.addEventListener('click', function (evt) {
+                    console.log("--- click ",evt.detail.intersection.point);
+                });
+            },
+            update: function () {},
+            tick: function () {},
+            remove: function () {},
+            pause: function () {},
+            play: function () {}
+        });
+    </script>
+
     <a-scene mindar-image="imageTargetSrc: https://housemagic.github.io/WebAR/assets/houseband.mind; maxTrack: 2" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
         <a-assets>
             <a-asset-item id="bearModel" src="https://housemagic.github.io/WebAR/assets/bear/scene.gltf"></a-asset-item>
             <a-asset-item id="raccoonModel" src="https://housemagic.github.io/WebAR/assets/raccoon/scene.gltf"></a-asset-item>
-            <a-asset-item id="vectorysound" src="https://housemagic.github.io/WebAR/vectory.mp3" preload="auto"></a-asset-item>
+            <audio id="vectorysound" src="https://housemagic.github.io/WebAR/vectory.mp3" preload="auto"></audio>
         </a-assets>
 
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -22,13 +38,13 @@
         <a-entity cursor="rayOrigin: mouse"></a-entity>
         <a-entity mindar-image-target="targetIndex: 0">
             <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#raccoonModel" animation-mixer>
-                <a-sphere color="yellow" radius="1" sound="src:url(https://housemagic.github.io/WebAR/vectory.mp3); on: click"></a-sphere>
+                <a-sphere fooclick color="yellow" radius="1" sound="src:url(https://housemagic.github.io/WebAR/vectory.mp3); on: click"></a-sphere>
             </a-gltf-model>
         </a-entity>
         <a-entity mindar-image-target="targetIndex: 1">
             <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel"  sound="src:#vectorysound; on: click" animation-mixer>
-                <a-sphere color="red" radius="10" sound="src:#vectorysound; on: click"></a-sphere>
             </a-gltf-model>
+            <a-sphere fooclick color="red" radius="0.1" sound="src:#vectorysound; on: click"></a-sphere>
         </a-entity>
     </a-scene>
   </body>
