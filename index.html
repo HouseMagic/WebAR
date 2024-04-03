@@ -32,6 +32,8 @@
             var marker = this.el;
             marker.addEventListener('markerFound', function () {
                 console.log("--- marker found");
+                var nftCamera = document.querySelector("#nftCamera");
+                nftCamera.setAttribute('camera', 'active', false);
             }.bind(this));
 
             marker.addEventListener('markerLost', function() {
@@ -57,7 +59,7 @@
     
     window.addEventListener("arjs-nft-loaded", (event) => {
         console.log("arjs-nft-loaded");
-
+        
     });
 </script>
 
