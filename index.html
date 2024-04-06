@@ -21,7 +21,15 @@
 
                 const arButton = document.querySelector("#ar-button");
 	            const modelBtn = document.querySelector("#model-button");
-                
+                // --  暂停所有音频
+                const stopAllSounds = function () {
+                    const allAudio = document.querySelectorAll('audio');
+                    allAudio.forEach(function(audioItem) {
+                        audioItem.pause();
+                    });
+                };
+
+                // -- 场景加载完成
                 sceneEl.addEventListener('loaded', function () {
                     arSystem = sceneEl.systems["mindar-image-system"];
                     console.log("arsystem", arSystem);
@@ -32,13 +40,11 @@
                         sceneEl.addEventListener('render-target-loaded', this.addEventListeners.bind(this));
                         return;
                     }
-                    // this['touch'+0] = {x:0,y:0}
-                    // this['touch'+1] = {x:0,y:0}
+                    // --    旋转 缩放  ----- 
                     let touchStarted = false;
                     let selfTouchData = {};
                     const bearObject = document.querySelector('#bearentity');
                     let onTouchStart = function (evt) {
-                        
                         for (let i = 0; i < evt.touches.length; i++) {
                             console.log("-- touch start", evt.touches[i].identifier,"x:"+evt.touches[i].pageX,"y:"+evt.touches[i].pageY);
                             selfTouchData['touch'+ evt.touches[i].identifier] = {x:evt.touches[i].pageX, y:evt.touches[i].pageY}
@@ -121,6 +127,7 @@
                     trackModel.setAttribute("visible", false);
                     document.getElementById('reddiv').style.display = 'none';
                     document.getElementById('yellowdiv').style.display = 'none';
+                    stopAllSounds();
                     arSystem.start(); // stop AR 
                 });
 
@@ -141,6 +148,7 @@
                     const btnName = btnList[i];
                     document.getElementById(btnName).addEventListener('click', function (evt) {
                         console.log("div btn click",btnName,evt);
+                        stopAllSounds();
                         document.getElementById(btnName+'_mp3').play();
                     })
                     
@@ -166,6 +174,7 @@
                     // detect target lost
                     this.el.addEventListener("targetLost", event => {
                         console.log("target lost");
+                        stopAllSounds();
                         document.getElementById('ar-button').style.display = "none";
                         document.getElementById('model-button').style.display = "none";
                         document.getElementById('reddiv').style.display = 'none';
@@ -192,6 +201,11 @@
                     this.el.addEventListener('click', function (evt) {
                         // console.log("--- click ",self.data);
                         // self.soundHowl.play();
+                        const fooclickAll = document.querySelectorAll('[fooclick]');
+                        
+                        for (let i = 0; i < fooclickAll.length; i++) {
+                            document.getElementById(fooclickAll[i].components.fooclick.data).style.display = 'none';
+                        }
                         document.getElementById(self.data).style.display = '';
                     });
                 },
