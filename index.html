@@ -148,8 +148,8 @@
             </a-gltf-model>
         </a-entity>
 
-        <a-entity id="bearentity" mindarcomponent mindar-image-target="targetIndex: 1">
-            <a-gltf-model position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel">
+        <a-entity mindarcomponent mindar-image-target="targetIndex: 1">
+            <a-gltf-model id="bearentity" position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer>
                 <a-sphere fooclick="vectory" position="0 1 1.5" class="clickable" color="red" radius="3"></a-sphere>
             </a-gltf-model>
         </a-entity>
