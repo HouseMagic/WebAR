@@ -13,7 +13,7 @@
   <body>
     
     <script>
-        const ver = "1.0.21111";
+        const ver = "1.0.211111";
         console.log("---  ver: " + ver);
         
         document.addEventListener("DOMContentLoaded", ()=>{
@@ -34,7 +34,7 @@
                 // this['touch'+1] = {x:0,y:0}
                 let touchStarted = false;
                 let selfTouchData = {};
-                const bearObject = document.querySelector('#bearmodel');
+                const bearObject = document.querySelector('#bearentity');
                 console.log("bearObject", bearObject)
                 let onTouchStart = function (evt) {
                     console.log("--- touch start", evt);
@@ -141,7 +141,7 @@
             </a-gltf-model>
         </a-entity>
 
-        <a-entity id="bearmodel" mindarcomponent mindar-image-target="targetIndex: 1">
+        <a-entity id="bearentity" mindarcomponent mindar-image-target="targetIndex: 1">
             <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer>
                 <a-sphere fooclick="vectory" position="0 1 1.5" class="clickable" color="red" radius="3"></a-sphere>
             </a-gltf-model>
