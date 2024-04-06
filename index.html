@@ -43,8 +43,8 @@
                     }
                 }
                 const rotateFactor = 3;
-                const maxScale = 0.15;
-                const minScale = 0.05;
+                const maxScale = 2;
+                const minScale = 1;
 
                 let onTouchMove = function (evt) {
                     if(evt.touches.length == 0) return;
@@ -178,7 +178,8 @@
 
         <a-entity mindarcomponent mindar-image-target="targetIndex: 1">
             <a-gltf-model id="bearentity" rotation="0 0 0 " position="0 -0.25 0" scale="1 1 1" src="#heartModel" animation-mixer>
-                <!-- <a-sphere fooclick="vectory" position="0 1 1.5" class="clickable" color="red" radius="1"></a-sphere> -->
+                <a-sphere fooclick="vectory" position="0 1 1.5" class="clickable" color="red" radius="0.5"></a-sphere>
+                <a-sphere fooclick="fail" position="1.3 2 1.5" class="clickable" color="yellow" radius="0.5"></a-sphere>
             </a-gltf-model>
         </a-entity>
 
