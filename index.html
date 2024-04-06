@@ -13,7 +13,7 @@
   <body>
     
     <script>
-        const ver = "1.0.211";
+        const ver = "1.0.2111";
         console.log("---  ver: " + ver);
         
         document.addEventListener("DOMContentLoaded", ()=>{
@@ -24,30 +24,31 @@
                 arSystem = sceneEl.systems["mindar-image-system"];
                 console.log("arsystem", arSystem);
                 window.arSystem = arSystem;
+                let canvasEl = sceneEl.canvas;
+                console.log("canvasEl --  ", canvasEl)
+                if (!canvasEl) {
+                    sceneEl.addEventListener('render-target-loaded', this.addEventListeners.bind(this));
+                    return;
+                }
+
+                let onTouchStart = function (params) {
+                    console.log("--- touch start", params);
+                }
+
+                let onTouchMove = function (params) {
+                    console.log("--- touch move", params);
+                }
+
+                let onTouchEnd = function (params) {
+                    console.log("--- touch end", params);
+                }
+
+                canvasEl.addEventListener('touchstart', onTouchStart);
+                window.addEventListener('touchmove', onTouchMove);
+                window.addEventListener('touchend', onTouchEnd);
+                window.addEventListener('cancel', onTouchEnd);
             })
-            let canvasEl = sceneEl.canvas;
-            console.log("canvasEl --  ", canvasEl)
-            if (!canvasEl) {
-                sceneEl.addEventListener('render-target-loaded', this.addEventListeners.bind(this));
-                return;
-            }
-
-            let onTouchStart = function (params) {
-                console.log("--- touch start", params);
-            }
-
-            let onTouchMove = function (params) {
-                console.log("--- touch move", params);
-            }
-
-            let onTouchEnd = function (params) {
-                console.log("--- touch end", params);
-            }
-
-            canvasEl.addEventListener('touchstart', onTouchStart);
-            window.addEventListener('touchmove', onTouchMove);
-            window.addEventListener('touchend', onTouchEnd);
-            window.addEventListener('cancel', onTouchEnd);
+            
         })
         
         AFRAME.registerComponent('mindarcomponent', {
