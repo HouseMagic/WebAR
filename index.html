@@ -42,7 +42,7 @@
                         selfTouchData['touch'+ evt.touches[i].identifier] = {x:evt.touches[i].pageX, y:evt.touches[i].pageY}
                     }
                 }
-                const rotateFactor = 4;
+                const rotateFactor = 3;
                 const maxScale = 0.2;
                 const minScale = 0.05;
 
@@ -76,7 +76,7 @@
                         const newDistance = Math.sqrt(Math.pow(newTouch1.x - newTouch0.x, 2) + Math.pow(newTouch1.y - newTouch0.y, 2) );;
                         const scaleOffset = (newDistance - oldDistance)/100;
                         console.log("oldTouch0:"+oldTouch0,"oldTouch1:"+oldTouch1,"newTouch0："+newTouch0,"newTouch1:"+newTouch1,"oldDistance:"+oldDistance,"newDistance:"+newDistance,"scaleOffset:"+scaleOffset);
-                        let scale = bearObject.object3D.scale; // getAttribute("scale")
+                        let scale = bearObject.getAttribute("scale"); // 
                         scale = {
                             x:scale.x + scaleOffset,
                             y:scale.y + scaleOffset,
@@ -91,8 +91,8 @@
                         {
                             scale = {x:minScale, y:minScale, z:minScale};
                         }
-                        console.log(bearObject.object3D.scale, "newScale",scale)
-                        bearObject.object3D.scale = scale;
+                        console.log(bearObject.getAttribute("scale"), "newScale",scale)
+                        bearObject.setAttribute("scale", scale);
                         selfTouchData['touch' + touch0.identifier] = newTouch0;
                         selfTouchData['touch' + touch1.identifier] = newTouch1;
                     }
