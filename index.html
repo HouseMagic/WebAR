@@ -55,7 +55,7 @@
                         const oldPos = selfTouchData['touch' + evt.touches[0].identifier]
                         const deltaPos = {x:currPos.x - oldPos.x, y:currPos.y - oldPos.y}
                         let deltaY = 2 * Math.PI * (deltaPos.x) / canvasEl.clientWidth;
-                        bearObject.rotation.y -= deltaY * 0.5;
+                        bearObject.object3D.rotation.y -= deltaY * 0.5;
                         selfTouchData['touch' + evt.touches[0].identifier] = currPos;
                     }else if(evt.touches.length == 2)
                     {
