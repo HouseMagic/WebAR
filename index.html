@@ -31,6 +31,7 @@
             pause: function () {},
             play: function () {}
         });
+        sound.play();
     </script>
 
     <a-scene mindar-image="imageTargetSrc: https://housemagic.github.io/WebAR/assets/houseband.mind; maxTrack: 2" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
@@ -50,9 +51,8 @@
 
         <a-entity mindar-image-target="targetIndex: 1">
             <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer>
-                <a-sphere fooclick="vectory" position="0 2 1.5" class="clickable" color="red" radius="1"></a-sphere>
+                <a-sphere position="0 2 1.5" class="clickable" color="red" radius="1"></a-sphere>
             </a-gltf-model>
-            
         </a-entity>
 
     </a-scene>
