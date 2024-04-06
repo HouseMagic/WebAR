@@ -30,17 +30,43 @@
                     sceneEl.addEventListener('render-target-loaded', this.addEventListeners.bind(this));
                     return;
                 }
-
-                let onTouchStart = function (params) {
-                    console.log("--- touch start", params);
+                // this['touch'+0] = {x:0,y:0}
+                // this['touch'+1] = {x:0,y:0}
+                let touchStarted = false;
+                let self = this;
+                const bearObject = document.querySelector('#bearmodel');
+                console.log("bearObject", bearObject)
+                let onTouchStart = function (evt) {
+                    console.log("--- touch start", evt);
+                    evt.touches.forEach(touch => {
+                        self['touch'+touch.identifier] = {x:touch.pageX, y:touch.pageY}
+                    });
+                    
                 }
 
-                let onTouchMove = function (params) {
-                    console.log("--- touch move", params);
+                let onTouchMove = function (evt) {
+                    console.log("--- touch move", evt);
+                    if(evt.touches.length == 0) return;
+                    else if(evt.touches.length == 1)
+                    {
+                        // 旋转
+                        const currPos = {x:evt.touches[0].pageX, y:evt.touches[0].pageY}
+                        const oldPos = self['touch'+evt.touches[0].identifier]
+                        const deltaPos = {x:currPos.x - oldPos.x, y:currPos.y - oldPos.y}
+                        let deltaY = 2 * Math.PI * (deltaPos.x) / canvasEl.clientWidth;
+                        bearObject.rotation.y -= deltaY * 0.5;
+                        self['touch'+evt.touches[0].identifier] = currPos;
+                    }else if(evt.touches.length == 2)
+                    {
+                        // 缩放
+                        
+                    }
+
                 }
 
-                let onTouchEnd = function (params) {
-                    console.log("--- touch end", params);
+                let onTouchEnd = function (evt) {
+                    console.log("--- touch end", evt);
+                    touchStarted = false;
                 }
 
                 canvasEl.addEventListener('touchstart', onTouchStart);
@@ -62,7 +88,7 @@
                     console.log("target found");
                     setTimeout(()=>{
                         window.arSystem.pause(true);
-                    }, 2000);
+                    }, 1000);
                 });
                 // detect target lost
                 this.el.addEventListener("targetLost", event => {
@@ -114,7 +140,7 @@
             </a-gltf-model>
         </a-entity>
 
-        <a-entity mindarcomponent mindar-image-target="targetIndex: 1">
+        <a-entity id="bearmodel" mindarcomponent mindar-image-target="targetIndex: 1">
             <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer>
                 <a-sphere fooclick="vectory" position="0 1 1.5" class="clickable" color="red" radius="3"></a-sphere>
             </a-gltf-model>
