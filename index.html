@@ -59,13 +59,15 @@
                         console.log("-- deltaY ",deltaY, "rotation",rotation);
                         rotation.y -= deltaY * 0.5;
                         rotation.x -= deltaY * 0.5;
+                        rotation.z -= deltaY * 0.5;
                         bearObject.setAttribute("rotation", rotation);
                         // bearObject.object3D.rotation.y -= deltaY * 0.5;
                         selfTouchData['touch' + evt.touches[0].identifier] = currPos;
+                        bearObject.setAttribute("scale", {x:1, y:1, z:1});
                     }else if(evt.touches.length == 2)
                     {
                         // 缩放
-
+                        bearObject.setAttribute("scale", {x:2, y:2, z:2});
                     }
 
                 }
@@ -93,7 +95,7 @@
                 this.el.addEventListener("targetFound", event => {
                     console.log("target found");
                     setTimeout(()=>{
-                        // window.arSystem.pause(true);
+                        window.arSystem.pause(true);
                     }, 1000);
                 });
                 // detect target lost
