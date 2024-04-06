@@ -35,36 +35,66 @@
                 let touchStarted = false;
                 let selfTouchData = {};
                 const bearObject = document.querySelector('#bearentity');
-                console.log("bearObject", bearObject)
                 let onTouchStart = function (evt) {
-                    console.log("--- touch start", evt);
                     
                     for (let i = 0; i < evt.touches.length; i++) {
                         console.log("-- touch start", evt.touches[i].identifier,"x:"+evt.touches[i].pageX,"y:"+evt.touches[i].pageY);
                         selfTouchData['touch'+ evt.touches[i].identifier] = {x:evt.touches[i].pageX, y:evt.touches[i].pageY}
                     }
                 }
-                const rotateFactor = 2;
+                const rotateFactor = 4;
+                const maxScale = 0.2;
+                const minScale = 0.05;
+
                 let onTouchMove = function (evt) {
-                    // console.log("--- touch move", evt);
                     if(evt.touches.length == 0) return;
                     else if(evt.touches.length == 1)
                     {
                         // 旋转
-                        let rotation = bearObject.getAttribute("rotation")
+                        let rotation = bearObject.object3D.getAttribute("rotation")
                         const currPos = {x:evt.touches[0].pageX, y:evt.touches[0].pageY}
                         const oldPos = selfTouchData['touch' + evt.touches[0].identifier]
                         const deltaPos = {x:currPos.x - oldPos.x, y:currPos.y - oldPos.y}
                         let deltaY = 2 * Math.PI * (deltaPos.x) / canvasEl.clientWidth;
                         let deltaX = 2 * Math.PI * (deltaPos.y) / canvasEl.clientHeight;
-                        console.log("-- deltaY ",deltaY, "rotation",rotation);
+                        console.log("-- deltaY ", deltaY, "-- deltaX ", deltaX);
+                        console.log( "rotation", rotation);
                         rotation.y -= deltaY * rotateFactor;
-                        rotation.z -= deltaX * rotateFactor;
-                        bearObject.setAttribute("rotation", rotation);
+                        rotation.x -= deltaX * rotateFactor;
+                        bearObject.object3D.setAttribute("rotation", rotation);
                         selfTouchData['touch' + evt.touches[0].identifier] = currPos;
                     }else if(evt.touches.length == 2)
                     {
                         // 缩放
+                        const touch0 = evt.touches[0];
+                        const touch1 = evt.touches[1];
+                        let oldTouch0 = selfTouchData['touch' + touch0.identifier];
+                        let oldTouch1 = selfTouchData['touch' + touch1.identifier];
+                        const newTouch0 = {x:touch0.pageX, y:touch0.pageY};
+                        const newTouch1 = {x:touch1.pageX, y:touch1.pageY};
+                        const oldDistance = Math.sqrt(Math.pow(oldTouch1.x - oldTouch0.x, 2) + Math.pow(oldTouch1.y - oldTouch0.y, 2) );
+                        const newDistance = Math.sqrt(Math.pow(newTouch1.x - newTouch0.x, 2) + Math.pow(newTouch1.y - newTouch0.y, 2) );;
+                        const scaleOffset = (newDistance - oldDistance)/100;
+                        console.log("oldTouch0:"+oldTouch0,"oldTouch1:"+oldTouch1,"newTouch0："+newTouch0,"newTouch1:"+newTouch1,"oldDistance:"+oldDistance,"newDistance:"+newDistance,"scaleOffset:"+scaleOffset);
+                        let scale = bearObject.object3D.getAttribute("scale");
+                        scale = {
+                            x:scale.x + scaleOffset,
+                            y:scale.y + scaleOffset,
+                            z:scale.z + scaleOffset,
+                        }
+
+                        if(scale.x > maxScale)
+                        {
+                            scale = {x:maxScale, y:maxScale, z:maxScale};
+                        }
+                        if(scale.x < minScale)
+                        {
+                            scale = {x:minScale, y:minScale, z:minScale};
+                        }
+                        console.log(bearObject.object3D.getAttribute("scale"), "newScale",scale)
+                        bearObject.object3D.setAttribute("scale", scale);
+                        selfTouchData['touch' + touch0.identifier] = newTouch0;
+                        selfTouchData['touch' + touch1.identifier] = newTouch1;
                     }
 
                 }
