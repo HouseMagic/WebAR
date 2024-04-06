@@ -33,13 +33,13 @@
                 // this['touch'+0] = {x:0,y:0}
                 // this['touch'+1] = {x:0,y:0}
                 let touchStarted = false;
-                let self = this;
+                let selfTouchData = {};
                 const bearObject = document.querySelector('#bearmodel');
                 console.log("bearObject", bearObject)
                 let onTouchStart = function (evt) {
                     console.log("--- touch start", evt);
                     evt.touches.forEach(touch => {
-                        self['touch'+touch.identifier] = {x:touch.pageX, y:touch.pageY}
+                        selfTouchData['touch'+ touch.identifier] = {x:touch.pageX, y:touch.pageY}
                     });
                     
                 }
@@ -51,15 +51,15 @@
                     {
                         // 旋转
                         const currPos = {x:evt.touches[0].pageX, y:evt.touches[0].pageY}
-                        const oldPos = self['touch'+evt.touches[0].identifier]
+                        const oldPos = selfTouchData['touch' + evt.touches[0].identifier]
                         const deltaPos = {x:currPos.x - oldPos.x, y:currPos.y - oldPos.y}
                         let deltaY = 2 * Math.PI * (deltaPos.x) / canvasEl.clientWidth;
                         bearObject.rotation.y -= deltaY * 0.5;
-                        self['touch'+evt.touches[0].identifier] = currPos;
+                        selfTouchData['touch' + evt.touches[0].identifier] = currPos;
                     }else if(evt.touches.length == 2)
                     {
                         // 缩放
-                        
+
                     }
 
                 }
