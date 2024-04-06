@@ -58,6 +58,7 @@
                         let deltaY = 2 * Math.PI * (deltaPos.x) / canvasEl.clientWidth;
                         console.log("-- deltaY ",deltaY, "rotation",rotation);
                         rotation.y -= deltaY * 0.5;
+                        rotation.x -= deltaY * 0.5;
                         bearObject.setAttribute("rotation", rotation);
                         // bearObject.object3D.rotation.y -= deltaY * 0.5;
                         selfTouchData['touch' + evt.touches[0].identifier] = currPos;
@@ -92,7 +93,7 @@
                 this.el.addEventListener("targetFound", event => {
                     console.log("target found");
                     setTimeout(()=>{
-                        window.arSystem.pause(true);
+                        // window.arSystem.pause(true);
                     }, 1000);
                 });
                 // detect target lost
