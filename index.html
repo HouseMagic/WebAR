@@ -8,14 +8,20 @@
         <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+        <script src="./howler.core.js"></script>
     </head>
   <body>
+    
     <script>
+        var sound = new Howl({
+            src:['vectory.mp3']
+        })
         AFRAME.registerComponent('fooclick', {
             schema: {},
             init: function () {
                 this.el.addEventListener('click', function (evt) {
                     console.log("--- click ",evt.detail.intersection.point);
+                    sound.play();
                 });
             },
             update: function () {},
@@ -24,6 +30,7 @@
             pause: function () {},
             play: function () {}
         });
+        sound.play();
     </script>
 
     <a-scene mindar-image="imageTargetSrc: https://housemagic.github.io/WebAR/assets/houseband.mind; maxTrack: 2" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
@@ -44,7 +51,7 @@
 
         <a-entity mindar-image-target="targetIndex: 1">
             <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer>
-                <a-sphere position="0 2 1.5" class="clickable" color="red" radius="5" sound="src:#vectorysound; on: click"></a-sphere>
+                <a-sphere fooclick position="0 2 1.5" class="clickable" color="red" radius="5" sound="src:#vectorysound; on: click"></a-sphere>
             </a-gltf-model>
             
         </a-entity sound="src: url(vectorysound.mp3); autoplay: true">
