@@ -13,7 +13,54 @@
   <body>
     
     <script>
-        console.log(new Date().toLocaleString());
+        const ver = "1.0.2";
+        console.log("---  ver: " + ver);
+        
+        document.addEventListener("DOMContentLoaded", ()=>{
+            const secenEl = document.querySelector('a-scene');
+            let arSystem;
+            console.log("sceneEl", secenEl);
+            secenEl.addEventListener('loaded', function () {
+                arSystem = secenEl.systems["mindar-image-system"];
+                console.log("arsystem", arSystem);
+            })
+
+            const exampleTarget = document.querySelector('#mindar-image-target');
+            // detect target found
+            exampleTarget.addEventListener("targetFound", event => {
+                console.log("target found");
+                arSystem.pause(true);
+            });
+            // detect target lost
+            exampleTarget.addEventListener("targetLost", event => {
+                console.log("target lost");
+            });
+
+            let canvasEl = sceneEl.canvas;
+            console.log("canvasEl --  ", canvasEl)
+            if (!canvasEl) {
+                sceneEl.addEventListener('render-target-loaded', this.addEventListeners.bind(this));
+                return;
+            }
+
+            let onTouchStart = function (params) {
+                console.log("--- touch start", params);
+            }
+
+            let onTouchMove = function (params) {
+                console.log("--- touch move", params);
+            }
+
+            let onTouchEnd = function (params) {
+                console.log("--- touch end", params);
+            }
+
+            canvasEl.addEventListener('touchstart', onTouchStart);
+            window.addEventListener('touchmove', onTouchMove);
+            window.addEventListener('touchend', onTouchEnd);
+            window.addEventListener('cancel', onTouchEnd);
+        })
+
         AFRAME.registerComponent('fooclick', {
             schema: {type: 'string'},
             init: function () {
@@ -38,7 +85,7 @@
 
     <a-scene mindar-image="imageTargetSrc: https://housemagic.github.io/WebAR/assets/houseband.mind; maxTrack: 2" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
        
-        <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="near: 10; far: 10000; objects: .clickable"></a-camera>
+        <a-camera position="0 0 0" look-controls="enabled: true" cursor="fuse: false; rayOrigin: mouse;" raycaster="near: 10; far: 10000; objects: .clickable"></a-camera>
 
         <a-assets>
             <a-asset-item id="bearModel" src="https://housemagic.github.io/WebAR/assets/bear/scene.gltf"></a-asset-item>
@@ -46,13 +93,13 @@
         </a-assets>
 
         <a-entity mindar-image-target="targetIndex: 0">
-            <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#raccoonModel">
+            <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#raccoonModel" animation-mixer>
                 <a-sphere fooclick="fail" class="clickable" color="yellow" radius="2" ></a-sphere>
             </a-gltf-model>
         </a-entity>
 
         <a-entity mindar-image-target="targetIndex: 1">
-            <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel">
+            <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer>
                 <a-sphere fooclick="vectory" position="0 1 1.5" class="clickable" color="red" radius="3"></a-sphere>
             </a-gltf-model>
         </a-entity>
