@@ -13,12 +13,13 @@
   <body>
     
     <script>
+        console.log(new Date().toLocaleString());
         AFRAME.registerComponent('fooclick', {
             schema: {type: 'string'},
             init: function () {
                 console.log("foo click  init ", this.data);
                 this.soundHowl = new Howl({
-                    src:['./audio/' + this.data +'.mp3'],
+                    src:['./assets/audio/' + this.data +'.mp3'],
                     html5:true
                 });
                 this.el.addEventListener('click', function (evt) {
