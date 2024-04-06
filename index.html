@@ -25,7 +25,7 @@
                 console.log("arsystem", arSystem);
             })
 
-            const exampleTarget = document.querySelector('#mindar-image-target');
+            const exampleTarget = document.querySelector('#mindar-image-target-1');
             // detect target found
             exampleTarget.addEventListener("targetFound", event => {
                 console.log("target found");
@@ -100,7 +100,7 @@
             </a-gltf-model>
         </a-entity>
 
-        <a-entity mindar-image-target="targetIndex: 1">
+        <a-entity id="mindar-image-target-1" mindar-image-target="targetIndex: 1">
             <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer>
                 <a-sphere fooclick="vectory" position="0 1 1.5" class="clickable" color="red" radius="3"></a-sphere>
             </a-gltf-model>
