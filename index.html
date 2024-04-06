@@ -132,6 +132,19 @@
 
                 document.getElementById('ar-button').style.display = "none";
                 document.getElementById('model-button').style.display = "none";
+
+
+
+                // --------------------------     div button    ----------------------------------------------
+                const btnList =['breath1','breath2','breath3','breath4','breath5','breath6'];
+                for (let i = 0; i < btnList.length; i++) {
+                    const btnName = btnList[i];
+                    document.getElementById(btnName).addEventListener('click', function (evt) {
+                        console.log("div btn click",btnName,evt);
+                        document.getElementById(btnName+'_mp3').play();
+                    })
+                    
+                }
             })
             
             AFRAME.registerComponent('mindarcomponent', {
@@ -189,16 +202,7 @@
                 play: function () {}
             });
 
-            // --------------------------     div button    ----------------------------------------------
-            const btnList =['breath1','breath2','breath3','breath4','breath5','breath6'];
-            for (let i = 0; i < btnList.length; i++) {
-                const btnName = btnList[i];
-                document.getElementById(btnName).addEventListener('click', function (evt) {
-                    console.log("div btn click",btnName,evt);
-                    document.getElementById(btnName+'_mp3').play();
-                })
-                
-            }
+            
         </script>
     </head>
   <body>
@@ -211,8 +215,8 @@
 
 
     <div style="position: absolute; z-index: 1000">
-        <button id="ar-button">AR</button>
-        <button id="model-button">3D</button>
+        <button id="ar-button" style="display: none;">AR</button>
+        <button id="model-button" style="display: none;">3D</button>
     </div>
 
     <div id="reddiv" style="position: absolute;  bottom: 20px; z-index: 999; display: none;">
