@@ -46,7 +46,7 @@
                 }
 
                 let onTouchMove = function (evt) {
-                    console.log("--- touch move", evt);
+                    // console.log("--- touch move", evt);
                     if(evt.touches.length == 0) return;
                     else if(evt.touches.length == 1)
                     {
@@ -55,6 +55,7 @@
                         const oldPos = selfTouchData['touch' + evt.touches[0].identifier]
                         const deltaPos = {x:currPos.x - oldPos.x, y:currPos.y - oldPos.y}
                         let deltaY = 2 * Math.PI * (deltaPos.x) / canvasEl.clientWidth;
+                        console.log("-- deltaY ",deltaY, "rotate",bearObject.object3D.rotation);
                         bearObject.object3D.rotation.y -= deltaY * 0.5;
                         selfTouchData['touch' + evt.touches[0].identifier] = currPos;
                     }else if(evt.touches.length == 2)
