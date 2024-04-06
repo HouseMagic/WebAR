@@ -17,11 +17,11 @@
         console.log("---  ver: " + ver);
         
         document.addEventListener("DOMContentLoaded", ()=>{
-            const secenEl = document.querySelector('a-scene');
+            const sceneEl = document.querySelector('a-scene');
             let arSystem;
-            console.log("sceneEl", secenEl);
-            secenEl.addEventListener('loaded', function () {
-                arSystem = secenEl.systems["mindar-image-system"];
+            console.log("sceneEl", sceneEl);
+            sceneEl.addEventListener('loaded', function () {
+                arSystem = sceneEl.systems["mindar-image-system"];
                 console.log("arsystem", arSystem);
                 window.arSystem = arSystem;
             })
@@ -53,7 +53,7 @@
         AFRAME.registerComponent('mindarcomponent', {
             schema: {},
             init: function () {
-                console.log("mindarcomponent  init ", this.el,"window.arSystem",window.arSystem);
+                console.log("mindarcomponent  init ", this.el,"window.arSystem",window.arSystem, arSystem);
                 
                 let self = this;
                 // detect target found
