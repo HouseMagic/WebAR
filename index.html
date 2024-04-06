@@ -18,13 +18,14 @@
             schema: {type: 'string'},
             init: function () {
                 console.log("foo click  init ", this.data);
-                this.soundHowl = new Howl({
+                let self = this;
+                self.soundHowl = new Howl({
                     src:['./assets/audio/' + this.data +'.mp3'],
                     html5:true
                 });
                 this.el.addEventListener('click', function (evt) {
-                    console.log("--- click ",this.data);
-                    this.soundHowl.play();
+                    console.log("--- click ",self.data);
+                    self.soundHowl.play();
                 });
             },
             update: function () {},
