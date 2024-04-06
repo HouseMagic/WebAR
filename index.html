@@ -44,7 +44,7 @@
                         selfTouchData['touch'+ evt.touches[i].identifier] = {x:evt.touches[i].pageX, y:evt.touches[i].pageY}
                     }
                 }
-
+                const rotateFactor = 2;
                 let onTouchMove = function (evt) {
                     // console.log("--- touch move", evt);
                     if(evt.touches.length == 0) return;
@@ -58,15 +58,13 @@
                         let deltaY = 2 * Math.PI * (deltaPos.x) / canvasEl.clientWidth;
                         let deltaX = 2 * Math.PI * (deltaPos.y) / canvasEl.clientHeight;
                         console.log("-- deltaY ",deltaY, "rotation",rotation);
-                        rotation.y -= deltaY * 0.5;
-                        rotation.x -= deltaX * 0.5;
+                        rotation.y -= deltaY ;
+                        rotation.z -= deltaX;
                         bearObject.setAttribute("rotation", rotation);
                         selfTouchData['touch' + evt.touches[0].identifier] = currPos;
-                        bearObject.setAttribute("scale", {x:0.06,y:0.06,z:0.06});
                     }else if(evt.touches.length == 2)
                     {
                         // 缩放
-                        bearObject.setAttribute("scale", {x:0.07,y:0.07,z:0.07});
                     }
 
                 }
@@ -74,10 +72,7 @@
                 let onTouchEnd = function (evt) {
                     console.log("--- touch end", evt);
                     touchStarted = false;
-                    if(evt.touches.length == 0) 
-                    {
-                        bearObject.setAttribute("scale", {x:0.05,y:0.05,z:0.05});
-                    }
+                   
                 }
 
                 canvasEl.addEventListener('touchstart', onTouchStart);
