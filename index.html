@@ -62,9 +62,11 @@
                         rotation.x -= deltaX * 0.5;
                         bearObject.setAttribute("rotation", rotation);
                         selfTouchData['touch' + evt.touches[0].identifier] = currPos;
+                        bearObject.setAttribute("scale", {x:0.06,y:0.06,z:0.06});
                     }else if(evt.touches.length == 2)
                     {
                         // 缩放
+                        bearObject.setAttribute("scale", {x:0.07,y:0.07,z:0.07});
                     }
 
                 }
@@ -72,6 +74,10 @@
                 let onTouchEnd = function (evt) {
                     console.log("--- touch end", evt);
                     touchStarted = false;
+                    if(evt.touches.length == 0) 
+                    {
+                        bearObject.setAttribute("scale", {x:0.05,y:0.05,z:0.05});
+                    }
                 }
 
                 canvasEl.addEventListener('touchstart', onTouchStart);
@@ -146,7 +152,7 @@
         </a-entity>
 
         <a-entity mindarcomponent mindar-image-target="targetIndex: 1">
-            <a-gltf-model id="bearentity" position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer>
+            <a-gltf-model id="bearentity" position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" >
                 <a-sphere fooclick="vectory" position="0 1 1.5" class="clickable" color="red" radius="3"></a-sphere>
             </a-gltf-model>
         </a-entity>
