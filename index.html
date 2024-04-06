@@ -25,18 +25,8 @@
                 console.log("arsystem", arSystem);
             })
 
-            const exampleTarget = document.querySelector('#mindar-image-target-1');
-            // detect target found
-            exampleTarget.addEventListener("targetFound", event => {
-                console.log("target found");
-                setTimeout(()=>{
-                    arSystem.pause(true);
-                }, 2000);
-            });
-            // detect target lost
-            exampleTarget.addEventListener("targetLost", event => {
-                console.log("target lost");
-            });
+            // const exampleTarget = document.querySelector('#mindar-image-target-1');
+            
 
             let canvasEl = sceneEl.canvas;
             console.log("canvasEl --  ", canvasEl)
@@ -62,7 +52,33 @@
             window.addEventListener('touchend', onTouchEnd);
             window.addEventListener('cancel', onTouchEnd);
         })
+        
+        AFRAME.registerComponent('mindarcomponent', {
+            schema: {},
+            init: function () {
+                console.log("mindarcomponent  init ", this.el,"arsys",arSystem);
+                
+                let self = this;
+                // detect target found
+                this.el.addEventListener("targetFound", event => {
+                    console.log("target found");
+                    setTimeout(()=>{
+                        arSystem.pause(true);
+                    }, 2000);
+                });
+                // detect target lost
+                this.el.addEventListener("targetLost", event => {
+                    console.log("target lost");
+                });
+            },
+            update: function () {},
+            tick: function () {},
+            remove: function () {},
+            pause: function () {},
+            play: function () {}
+        });
 
+        // -----------------   foo click  component  ---------------------------------------------------
         AFRAME.registerComponent('fooclick', {
             schema: {type: 'string'},
             init: function () {
@@ -100,7 +116,7 @@
             </a-gltf-model>
         </a-entity>
 
-        <a-entity id="mindar-image-target-1" mindar-image-target="targetIndex: 1">
+        <a-entity mindarcomponent mindar-image-target="targetIndex: 1">
             <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer>
                 <a-sphere fooclick="vectory" position="0 1 1.5" class="clickable" color="red" radius="3"></a-sphere>
             </a-gltf-model>
