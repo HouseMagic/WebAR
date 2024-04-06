@@ -124,7 +124,7 @@
                     console.log("target found");
                     setTimeout(()=>{
                         window.arSystem.pause(true);
-                    }, 1000);
+                    }, 2000);
                 });
                 // detect target lost
                 this.el.addEventListener("targetLost", event => {
@@ -167,17 +167,17 @@
 
         <a-assets>
             <a-asset-item id="heartModel" src="https://housemagic.github.io/WebAR/assets/heart/scene.gltf"></a-asset-item>
-            <a-asset-item id="raccoonModel" src="https://housemagic.github.io/WebAR/assets/raccoon/scene.gltf"></a-asset-item>
+            <!-- <a-asset-item id="raccoonModel" src="https://housemagic.github.io/WebAR/assets/raccoon/scene.gltf"></a-asset-item> -->
         </a-assets>
 
         <a-entity mindar-image-target="targetIndex: 0">
-            <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#raccoonModel" animation-mixer>
+            <!-- <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#raccoonModel" animation-mixer>
                 <a-sphere fooclick="fail" class="clickable" color="yellow" radius="2" ></a-sphere>
-            </a-gltf-model>
+            </a-gltf-model> -->
         </a-entity>
 
         <a-entity mindarcomponent mindar-image-target="targetIndex: 1">
-            <a-gltf-model id="bearentity" rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#heartModel" animation-mixer>
+            <a-gltf-model id="bearentity" rotation="0 0 0 " position="0 -0.25 0" scale="0.5 0.5 0.5" src="#heartModel" animation-mixer>
                 <a-sphere fooclick="vectory" position="0 1 1.5" class="clickable" color="red" radius="2"></a-sphere>
             </a-gltf-model>
         </a-entity>
