@@ -17,10 +17,11 @@
             src:['vectory.mp3']
         })
         AFRAME.registerComponent('fooclick', {
-            schema: {},
+            schema: {type: 'string'},
             init: function () {
+                console.log("foo click  init ", this.data);
                 this.el.addEventListener('click', function (evt) {
-                    console.log("--- click ",evt.detail.intersection.point);
+                    console.log("--- click ",this.data);
                     sound.play();
                 });
             },
@@ -30,7 +31,6 @@
             pause: function () {},
             play: function () {}
         });
-        sound.play();
     </script>
 
     <a-scene mindar-image="imageTargetSrc: https://housemagic.github.io/WebAR/assets/houseband.mind; maxTrack: 2" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
@@ -40,21 +40,20 @@
         <a-assets>
             <a-asset-item id="bearModel" src="https://housemagic.github.io/WebAR/assets/bear/scene.gltf"></a-asset-item>
             <a-asset-item id="raccoonModel" src="https://housemagic.github.io/WebAR/assets/raccoon/scene.gltf"></a-asset-item>
-            <audio crossorigin="anonymous" id="vectorysound" src="https://housemagic.github.io/WebAR/vectory.mp3" preload="auto"></audio>
         </a-assets>
 
         <a-entity mindar-image-target="targetIndex: 0">
             <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#raccoonModel" animation-mixer>
-                <a-sphere class="clickable" color="yellow" radius="1" sound="src:url(https://housemagic.github.io/WebAR/vectory.mp3); on: click"></a-sphere>
+                <a-sphere class="clickable" color="yellow" radius="1" ></a-sphere>
             </a-gltf-model>
         </a-entity>
 
         <a-entity mindar-image-target="targetIndex: 1">
             <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer>
-                <a-sphere fooclick position="0 2 1.5" class="clickable" color="red" radius="5" sound="src:#vectorysound; on: click"></a-sphere>
+                <a-sphere fooclick="vectory" position="0 2 1.5" class="clickable" color="red" radius="1"></a-sphere>
             </a-gltf-model>
             
-        </a-entity sound="src: url(vectorysound.mp3); autoplay: true">
+        </a-entity>
 
     </a-scene>
   </body>
