@@ -13,16 +13,17 @@
   <body>
     
     <script>
-        var sound = new Howl({
-            src:['vectory.mp3']
-        })
         AFRAME.registerComponent('fooclick', {
             schema: {type: 'string'},
             init: function () {
                 console.log("foo click  init ", this.data);
+                this.soundHowl = new Howl({
+                    src:['./audio/' + this.data +'.mp3'],
+                    html5:true
+                });
                 this.el.addEventListener('click', function (evt) {
                     console.log("--- click ",this.data);
-                    sound.play();
+                    this.soundHowl.play();
                 });
             },
             update: function () {},
@@ -31,7 +32,6 @@
             pause: function () {},
             play: function () {}
         });
-        sound.play();
     </script>
 
     <a-scene mindar-image="imageTargetSrc: https://housemagic.github.io/WebAR/assets/houseband.mind; maxTrack: 2" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
@@ -44,14 +44,14 @@
         </a-assets>
 
         <a-entity mindar-image-target="targetIndex: 0">
-            <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#raccoonModel" animation-mixer>
-                <a-sphere class="clickable" color="yellow" radius="1" ></a-sphere>
+            <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#raccoonModel">
+                <a-sphere fooclick="fail" class="clickable" color="yellow" radius="2" ></a-sphere>
             </a-gltf-model>
         </a-entity>
 
         <a-entity mindar-image-target="targetIndex: 1">
-            <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer>
-                <a-sphere position="0 2 1.5" class="clickable" color="red" radius="1"></a-sphere>
+            <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel">
+                <a-sphere fooclick="vectory" position="0 1 1.5" class="clickable" color="red" radius="3"></a-sphere>
             </a-gltf-model>
         </a-entity>
 
