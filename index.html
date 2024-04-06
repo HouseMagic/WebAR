@@ -51,12 +51,15 @@
                     else if(evt.touches.length == 1)
                     {
                         // 旋转
+                        let rotation = bearObject.getAttribute("rotation")
                         const currPos = {x:evt.touches[0].pageX, y:evt.touches[0].pageY}
                         const oldPos = selfTouchData['touch' + evt.touches[0].identifier]
                         const deltaPos = {x:currPos.x - oldPos.x, y:currPos.y - oldPos.y}
                         let deltaY = 2 * Math.PI * (deltaPos.x) / canvasEl.clientWidth;
-                        console.log("-- deltaY ",deltaY, "rotate",bearObject.object3D.rotation);
-                        bearObject.object3D.rotation.y -= deltaY * 0.5;
+                        console.log("-- deltaY ",deltaY, "rotation",rotation);
+                        rotation.y -= deltaY * 0.5;
+                        bearObject.setAttribute("rotation", rotation);
+                        // bearObject.object3D.rotation.y -= deltaY * 0.5;
                         selfTouchData['touch' + evt.touches[0].identifier] = currPos;
                     }else if(evt.touches.length == 2)
                     {
