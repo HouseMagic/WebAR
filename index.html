@@ -137,12 +137,16 @@
                         // setTimeout(()=>{
                         //     window.arSystem.pause(true);
                         // }, 500);
-                        window.arSystem.pause(true);
+                        // window.arSystem.pause(true);
+                        document.getElementById('ar-button').style.display = "block";
+                        document.getElementById('model-button').style.display = "block";
                     });
                     // detect target lost
                     this.el.addEventListener("targetLost", event => {
                         console.log("target lost");
-                        if(window.imageTrackType == "ar") window.arSystem.unpause();
+                        document.getElementById('ar-button').style.display = "none";
+                        document.getElementById('model-button').style.display = "none";
+                        // if(window.imageTrackType == "ar") window.arSystem.unpause();
                     });
                 },
                 update: function () {},
@@ -180,7 +184,7 @@
     <div style="position: absolute; z-index: 1000">
         <button id="ar-button">AR</button>
         <button id="model-button">3D</button>
-      </div>
+    </div>
 
     <a-scene mindar-image="imageTargetSrc: ./assets/houseband.mind; maxTrack: 2" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
        
