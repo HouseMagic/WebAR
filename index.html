@@ -115,14 +115,23 @@
                 
                 window.imageTrackType = "ar";
                 arButton.addEventListener('click', () => {
+                    if(window.imageTrackType == "ar") return;
                     window.imageTrackType = "ar";
+                    const trackModel = document.querySelector("#heartmodelentity");
+                    trackModel.setAttribute("visible", false);
+                    document.getElementById('reddiv').style.display = 'none';
+                    document.getElementById('yellowdiv').style.display = 'none';
                     arSystem.start(); // stop AR 
                 });
 
                 modelBtn.addEventListener('click', () => {
+                    if(window.imageTrackType == "model") return;
                     arSystem.stop(); // stop AR 
                     window.imageTrackType = "model";
                 });
+
+                document.getElementById('ar-button').style.display = "none";
+                document.getElementById('model-button').style.display = "none";
             })
             
             AFRAME.registerComponent('mindarcomponent', {
@@ -146,7 +155,8 @@
                         console.log("target lost");
                         document.getElementById('ar-button').style.display = "none";
                         document.getElementById('model-button').style.display = "none";
-                        // if(window.imageTrackType == "ar") window.arSystem.unpause();
+                        document.getElementById('reddiv').style.display = 'none';
+                        document.getElementById('yellowdiv').style.display = 'none';
                     });
                 },
                 update: function () {},
@@ -162,13 +172,14 @@
                 init: function () {
                     console.log("foo click  init ", this.data);
                     let self = this;
-                    self.soundHowl = new Howl({
-                        src:['./assets/audio/' + this.data +'.mp3'],
-                        html5:true
-                    });
+                    // self.soundHowl = new Howl({
+                    //     src:['./assets/audio/' + this.data +'.mp3'],
+                    //     html5:true
+                    // });
                     this.el.addEventListener('click', function (evt) {
-                        console.log("--- click ",self.data);
-                        self.soundHowl.play();
+                        // console.log("--- click ",self.data);
+                        // self.soundHowl.play();
+                        document.getElementById(this.data).style.display = '';
                     });
                 },
                 update: function () {},
@@ -177,13 +188,43 @@
                 pause: function () {},
                 play: function () {}
             });
+
+            // --------------------------     div button    ----------------------------------------------
+            const btnList =['breath1','breath2','breath3','breath4','breath5','breath6'];
+            for (let i = 0; i < btnList.length; i++) {
+                const btnName = btnList[i];
+                document.getElementById(btnName).addEventListener('click', function (evt) {
+                    console.log("div btn click",btnName,evt);
+                    document.getElementById(btnName+'_mp3').play();
+                })
+                
+            }
         </script>
     </head>
   <body>
-    
+    <audio id="breath1_mp3" src="./assets/audio/breath1.mp3"></audio>
+    <audio id="breath2_mp3" src="./assets/audio/breath2.mp3"></audio>
+    <audio id="breath3_mp3" src="./assets/audio/breath3.mp3"></audio>
+    <audio id="breath4_mp3" src="./assets/audio/breath4.mp3"></audio>
+    <audio id="breath5_mp3" src="./assets/audio/breath5.mp3"></audio>
+    <audio id="breath6_mp3" src="./assets/audio/breath6.mp3"></audio>
+
+
     <div style="position: absolute; z-index: 1000">
         <button id="ar-button">AR</button>
         <button id="model-button">3D</button>
+    </div>
+
+    <div id="reddiv" style="position: absolute;  bottom: 20px; z-index: 999; display: none;">
+        <button id="breath1">breath1</button>
+        <button id="breath2">breath2</button>
+        <button id="breath3">breath3</button>
+    </div>
+
+    <div id="yellowdiv" style="position: absolute; bottom: 20px; z-index: 999; display: none;">
+        <button id="breath4">breath4</button>
+        <button id="breath5">breath5</button>
+        <button id="breath6">breath6</button>
     </div>
 
     <a-scene mindar-image="imageTargetSrc: ./assets/houseband.mind; maxTrack: 2" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
@@ -201,10 +242,10 @@
             </a-gltf-model> -->
         </a-entity>
 
-        <a-entity mindarcomponent mindar-image-target="targetIndex: 1">
+        <a-entity id="heartmodelentity" mindarcomponent mindar-image-target="targetIndex: 1">
             <a-gltf-model id="bearentity" rotation="0 0 0 " position="0 -0.25 0" scale="1 1 1" src="#heartModel" animation-mixer>
-                <a-sphere fooclick="vectory" position="0 0 0.5" class="clickable" color="red" radius="0.15"></a-sphere>
-                <a-sphere fooclick="fail" position="0 0.6 0" class="clickable" color="yellow" radius="0.15"></a-sphere>
+                <a-sphere fooclick="reddiv" position="0 0 0.5" class="clickable" color="red" radius="0.15"></a-sphere>
+                <a-sphere fooclick="yellowdiv" position="0 0.6 0" class="clickable" color="yellow" radius="0.15"></a-sphere>
             </a-gltf-model>
         </a-entity>
 
