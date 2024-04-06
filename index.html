@@ -43,7 +43,7 @@
                     }
                 }
                 const rotateFactor = 3;
-                const maxScale = 0.2;
+                const maxScale = 0.15;
                 const minScale = 0.05;
 
                 let onTouchMove = function (evt) {
@@ -74,7 +74,7 @@
                         const newTouch1 = {x:touch1.pageX, y:touch1.pageY};
                         const oldDistance = Math.sqrt(Math.pow(oldTouch1.x - oldTouch0.x, 2) + Math.pow(oldTouch1.y - oldTouch0.y, 2) );
                         const newDistance = Math.sqrt(Math.pow(newTouch1.x - newTouch0.x, 2) + Math.pow(newTouch1.y - newTouch0.y, 2) );;
-                        const scaleOffset = (newDistance - oldDistance)/100;
+                        const scaleOffset = (newDistance - oldDistance)/200;
                         console.log("oldTouch0:"+oldTouch0,"oldTouch1:"+oldTouch1,"newTouch0："+newTouch0,"newTouch1:"+newTouch1,"oldDistance:"+oldDistance,"newDistance:"+newDistance,"scaleOffset:"+scaleOffset);
                         let scale = bearObject.getAttribute("scale"); // 
                         scale = {
@@ -166,7 +166,7 @@
         <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="near: 10; far: 10000; objects: .clickable"></a-camera>
 
         <a-assets>
-            <a-asset-item id="bearModel" src="https://housemagic.github.io/WebAR/assets/bear/scene.gltf"></a-asset-item>
+            <a-asset-item id="heartModel" src="https://housemagic.github.io/WebAR/assets/heart/scene.gltf"></a-asset-item>
             <a-asset-item id="raccoonModel" src="https://housemagic.github.io/WebAR/assets/raccoon/scene.gltf"></a-asset-item>
         </a-assets>
 
@@ -177,8 +177,8 @@
         </a-entity>
 
         <a-entity mindarcomponent mindar-image-target="targetIndex: 1">
-            <a-gltf-model id="bearentity" rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer>
-                <a-sphere fooclick="vectory" position="0 1 1.5" class="clickable" color="red" radius="3"></a-sphere>
+            <a-gltf-model id="bearentity" rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#heartModel" animation-mixer>
+                <a-sphere fooclick="vectory" position="0 1 1.5" class="clickable" color="red" radius="2"></a-sphere>
             </a-gltf-model>
         </a-entity>
 
