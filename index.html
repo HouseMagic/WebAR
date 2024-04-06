@@ -58,8 +58,8 @@
                         let deltaY = 2 * Math.PI * (deltaPos.x) / canvasEl.clientWidth;
                         let deltaX = 2 * Math.PI * (deltaPos.y) / canvasEl.clientHeight;
                         console.log("-- deltaY ",deltaY, "rotation",rotation);
-                        rotation.y -= deltaY ;
-                        rotation.z -= deltaX;
+                        rotation.y -= deltaY * rotateFactor;
+                        rotation.z -= deltaX * rotateFactor;
                         bearObject.setAttribute("rotation", rotation);
                         selfTouchData['touch' + evt.touches[0].identifier] = currPos;
                     }else if(evt.touches.length == 2)
